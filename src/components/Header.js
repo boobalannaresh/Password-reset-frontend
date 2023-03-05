@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./header.css";
 import Avatar from "@mui/material/Avatar";
 import { LoginContext } from "./ContextProvider/Context";
@@ -11,6 +11,7 @@ import { env } from "../config";
 
 const Header = () => {
 
+  const [data, setData] = useState()
   const navigate = useNavigate()
 
   const { logindata, setLoginData } = useContext(LoginContext);
@@ -37,7 +38,7 @@ const Header = () => {
       credentials: "include"
     })
       .then((res) => res.json())
-      .then((data) =>  console.log(data) )
+      .then((data) =>  setData(data) )
 
     if (data.status == 201) {
 
