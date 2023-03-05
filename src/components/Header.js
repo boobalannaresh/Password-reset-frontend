@@ -36,8 +36,8 @@ const Header = () => {
       },
       credentials: "include"
     })
-      .then(res => res.json())
-      .then(data => { console.log(data) })
+      .then((res) => res.json())
+      .then((data) =>  console.log(data) )
 
     if (data.status == 201) {
 
