@@ -28,7 +28,7 @@ const Header = () => {
   const logoutuser = async () => {
     let token = localStorage.getItem("usersdatatoken");
 
-    const res = await fetch("/logout", {
+    const res = await fetch("https://password-reset-backend-lilac.vercel.app/logout", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +38,7 @@ const Header = () => {
       credentials: "include"
     })
       .then((res) => res.json())
-      .then((data) =>  setData(data) )
+      .then((data) => setData(data))
 
     if (data.status == 201) {
 
