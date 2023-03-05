@@ -9,11 +9,13 @@ import { env } from '../config';
 
 const ForgotPassword = () => {
 
+    const [data, setData] = useState();
+
     const { id, token } = useParams();
 
     const navigate = useNavigate();
 
-    const [data2, setData] = useState(false);
+    const [data2, setData2] = useState(false);
 
     const [password, setPassword] = useState("");
 
@@ -25,9 +27,9 @@ const ForgotPassword = () => {
             headers: {
                 "Content-Type": "application/json"
             }
-        });
-
-        const data = await res.json()
+        })
+        .then((res) => res.json())
+        .then((data) => setData(data))
 
         if (data.status == 201) {
             console.log("User Valid")
@@ -81,7 +83,7 @@ const ForgotPassword = () => {
     useEffect(() => {
         userValid()
         setTimeout(() => {
-            setData(true)
+            setData2(true)
         }, 3000)
     }, [])
 
