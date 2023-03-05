@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import CircularProgress from "@mui/material/CircularProgress";
@@ -9,7 +9,7 @@ import { env } from '../config';
 
 const ForgotPassword = () => {
 
-    const {id, token} = useParams();
+    const { id, token } = useParams();
 
     const navigate = useNavigate();
 
@@ -20,30 +20,30 @@ const ForgotPassword = () => {
     const [message, setMessage] = useState("");
 
     const userValid = async () => {
-        const res = await fetch(`https://password-reset-backend-lilac.vercel.app/forgotpassword/${id}/${token}`,{
+        const res = await fetch(`/forgotpassword/${id}/${token}`, {
             method: "GET",
-            headers:{
-                "Content-Type" : "application/json"
+            headers: {
+                "Content-Type": "application/json"
             }
         });
 
         const data = await res.json()
 
-        if(data.status == 201){
+        if (data.status == 201) {
             console.log("User Valid")
-        }else{
+        } else {
             navigate("*")
         }
     }
-  
 
-    const setVal = (e) =>{
+
+    const setVal = (e) => {
 
         setPassword(e.target.value)
     }
 
 
-    const sendpassword = async (e) =>{
+    const sendpassword = async (e) => {
         e.preventDefault();
 
         if (password === "") {
@@ -64,18 +64,18 @@ const ForgotPassword = () => {
             });
 
 
-        const data = await res.json()
+            const data = await res.json()
 
-        if(data.status == 201){
-          setPassword("")
-          setMessage(true)
-        }else{
-            toast.error("! 😐 Token Expired generate new LInk ",{
-                position: "top-center"
-            })
+            if (data.status == 201) {
+                setPassword("")
+                setMessage(true)
+            } else {
+                toast.error("! 😐 Token Expired generate new LInk ", {
+                    position: "top-center"
+                })
+            }
         }
     }
-}
 
 
     useEffect(() => {
@@ -84,55 +84,55 @@ const ForgotPassword = () => {
             setData(true)
         }, 3000)
     }, [])
-    
-    
-    return (
-      <>
-      {
-        data2 ? (
-            <>
-            <section>
-            <div className="form_data">
-                <div className="form_heading">
-                    <h1>Enter Your New Password</h1>
-                   
-                </div>
 
-    {
-        message ? <p style={{color:"green", fontWeight:"bold"}}>Password Reset Successfully 🎉🎊😉</p> : " "
-    }
-   
-                <form>
-                    <div className="form_input">
-                        <label htmlFor="password">New Password</label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={setVal}
-                            name="password"
-                            id="password"
-                            placeholder="Enter Your New Password"
-                        />
-                    </div>
-    
-    
-                    <button className="btn" onClick={sendpassword}>Submit</button>
-                    
-                </form>
-                <ToastContainer />
-            </div>
-        </section>
-            </>
-        ) : (
-            <Box sx={{ display: "flex", justifyContent:"center", alignItems:"center", height:"100vh" }}>
-              Loading .....
-              <CircularProgress />
-            </Box>
-          )
-      }
-        
-      </>
+
+    return (
+        <>
+            {
+                data2 ? (
+                    <>
+                        <section>
+                            <div className="form_data">
+                                <div className="form_heading">
+                                    <h1>Enter Your New Password</h1>
+
+                                </div>
+
+                                {
+                                    message ? <p style={{ color: "green", fontWeight: "bold" }}>Password Reset Successfully 🎉🎊😉</p> : " "
+                                }
+
+                                <form>
+                                    <div className="form_input">
+                                        <label htmlFor="password">New Password</label>
+                                        <input
+                                            type="password"
+                                            value={password}
+                                            onChange={setVal}
+                                            name="password"
+                                            id="password"
+                                            placeholder="Enter Your New Password"
+                                        />
+                                    </div>
+
+
+                                    <button className="btn" onClick={sendpassword}>Submit</button>
+
+                                </form>
+                                <ToastContainer />
+                            </div>
+                        </section>
+                    </>
+                ) : (
+                    <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+                        Loading .....
+                        <CircularProgress />
+                    </Box>
+                )
+            }
+
+        </>
     )
-  }
-  
+}
+
 export default ForgotPassword
