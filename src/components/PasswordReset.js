@@ -19,7 +19,7 @@ const PasswordReset = () => {
     const sendLink = async (e) => {
        e.preventDefault()
     
-    const res = await fetch(`${env.api}/sendpasswordlink`,{
+    const res = await fetch(`https://password-reset-backend-lilac.vercel.app/sendpasswordlink`,{
         method:"POST",
         headers:{
             "Content-Type":"application/json"

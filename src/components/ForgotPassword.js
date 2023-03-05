@@ -20,7 +20,7 @@ const ForgotPassword = () => {
     const [message, setMessage] = useState("");
 
     const userValid = async () => {
-        const res = await fetch(`${env.api}/forgotpassword/${id}/${token}`,{
+        const res = await fetch(`https://password-reset-backend-lilac.vercel.app/forgotpassword/${id}/${token}`,{
             method: "GET",
             headers:{
                 "Content-Type" : "application/json"
