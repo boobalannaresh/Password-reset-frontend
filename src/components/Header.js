@@ -35,10 +35,9 @@ const Header = () => {
         Accept: "application/json"
       },
       credentials: "include"
-    });
-
-    const data = await res.json();
-    console.log(data)
+    })
+      .then(res => res.json())
+      .then(data => { console.log(data) })
 
     if (data.status == 201) {
 
