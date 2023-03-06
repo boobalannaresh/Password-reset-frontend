@@ -22,7 +22,7 @@ const ForgotPassword = () => {
     const [message, setMessage] = useState("");
 
     const userValid = async () => {
-        const res = await fetch(`/forgotpassword/${id}/${token}`, {
+        const res = await fetch(`${env.api}/forgotpassword/${id}/${token}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -57,7 +57,7 @@ const ForgotPassword = () => {
                 position: "top-center"
             });
         } else {
-            const res = await fetch(`/${id}/${token}`, {
+            const res = await fetch(`${env.api}/${id}/${token}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
